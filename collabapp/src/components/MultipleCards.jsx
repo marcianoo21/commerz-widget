@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Button, Box, SimpleGrid } from '@chakra-ui/react';
-import { FaChartBar, FaUsers, FaCalendarAlt, FaMoneyCheckAlt, FaEnvelope } from 'react-icons/fa'; // Import ikon z Font Awesome
+import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Button, Box, SimpleGrid, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { FaChartBar, FaUsers, FaCalendarAlt, FaMoneyCheckAlt, FaEnvelope, FaHistory } from 'react-icons/fa'; // Import ikon z Font Awesome
 import '../styles/UpperTab.css'; // Upewnij się, że importujesz odpowiedni plik CSS
 
 const MultipleCards = () => {
@@ -42,15 +42,40 @@ const MultipleCards = () => {
             <Card className="animated-card" backgroundColor="#F0FFF0" boxShadow="md" height="280px">
                 <CardHeader textAlign="center">
                     <Box display="flex" alignItems="center" justifyContent="center">
-                        <FaCalendarAlt style={{ marginRight: '8px' }} />
-                        <Heading size='md'>Customer Dashboard</Heading>
+                        <FaHistory style={{ marginRight: '8px' }} />
+                        <Heading size='md'>Payment History</Heading>
                     </Box>
                 </CardHeader>
                 <CardBody overflowY="auto">
-                    <Text>View a summary of all your customers over the last month.</Text>
+                    <Table variant="simple">
+                        <Thead>
+                            <Tr>
+                                <Th>Date</Th>
+                                <Th>Amount</Th>
+                                <Th>Description</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            <Tr>
+                                <Td>2023-01-01</Td>
+                                <Td color="red">-100 PLN</Td>
+                                <Td>Payment for services</Td>
+                            </Tr>
+                            <Tr>
+                                <Td>2023-01-02</Td>
+                                <Td color="red">-200 PLN</Td>
+                                <Td>Payment for goods</Td>
+                            </Tr>
+                            <Tr>
+                                <Td>2023-01-03</Td>
+                                <Td color="green">+150 PLN</Td>
+                                <Td>Refund</Td>
+                            </Tr>
+                        </Tbody>
+                    </Table>
                 </CardBody>
                 <CardFooter display="flex" justifyContent="center">
-                    <Button>View Here</Button>
+                    <Button>View Full History</Button>
                 </CardFooter>
             </Card>
             <Card className="animated-card" backgroundColor="#F0FFF0" boxShadow="md" height="280px">
