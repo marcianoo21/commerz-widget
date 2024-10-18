@@ -1,25 +1,13 @@
-import {
-	Modal,
-	ModalOverlay,
-	ModalContent,
-	ModalHeader,
-	ModalBody,
-	ModalFooter,
-	Button,
-	Text,
-	Box,
-	Flex,
-	FormLabel,
-	Textarea,
-} from '@chakra-ui/react'
-import { AddIcon } from '@chakra-ui/icons'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from '@chakra-ui/react'
 import { useState } from 'react'
+import EventDetails from './EventDetails'
 
 function Event({ selectedDate, isOpen, onClose }) {
+	// State to track the event description
 	const [eventDescription, setEventDescription] = useState('')
 
 	const handleAddEvent = () => {
-		// Here you would typically handle the event saving logic
+		// Handle the event saving logic
 		console.log(`Event on ${selectedDate.toDateString()}: ${eventDescription}`)
 		onClose() // Close the modal after adding the event
 	}
@@ -28,28 +16,20 @@ function Event({ selectedDate, isOpen, onClose }) {
 		<Modal isOpen={isOpen} onClose={onClose} size='sm' isCentered>
 			<ModalOverlay />
 			<ModalContent>
-				<ModalHeader>Event Details for {selectedDate.toDateString()}</ModalHeader>
+				<ModalHeader>Add Event</ModalHeader> {/* Display the selected date */}
 				<ModalBody>
-					<Box>
-						<FormLabel htmlFor='event-description'>Event Description</FormLabel>
-						<Textarea
-							id='event-description'
-							placeholder='Write your event details here...'
-							value={eventDescription}
-							onChange={e => setEventDescription(e.target.value)}
-							resize='none'
-							height='150px' // Adjust height as necessary
-						/>
-						<Flex justifyContent='flex-end' mt={4}>
-							<Button leftIcon={<AddIcon />} colorScheme='green' onClick={handleAddEvent}>
-								Add Event
-							</Button>
-						</Flex>
-					</Box>
+					{/* Pass the selectedDate, event description, and setter functions to EventDetails */}
+					<EventDetails
+						selectedDate={selectedDate}
+						eventDescription={eventDescription}
+						setEventDescription={setEventDescription}
+					/>
 				</ModalBody>
-
 				<ModalFooter>
-					<Button colorScheme='blue' onClick={onClose}>
+					<Button colorScheme='blue' onClick={handleAddEvent}>
+						Save
+					</Button>
+					<Button variant='ghost' onClick={onClose}>
 						Close
 					</Button>
 				</ModalFooter>
