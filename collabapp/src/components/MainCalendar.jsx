@@ -11,11 +11,17 @@ import {
 	ModalCloseButton,
 	useDisclosure,
 	Box,
+	Tabs,
+	TabList,
+	TabPanels,
+	Tab,
+	TabPanel,
 } from '@chakra-ui/react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import '../styles/Calendar.css' // Import your CSS styles
 import Event from './Event' // Import Event component
+import TransactionList from './TransactionList' // Import TransactionList component for transactions
 
 function CalendarModal() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -23,12 +29,15 @@ function CalendarModal() {
 	const { isOpen: isEventOpen, onOpen: onEventOpen, onClose: onEventClose } = useDisclosure()
 	const [selectedDate, setSelectedDate] = useState(null)
 	const [events, setEvents] = useState({}) // State to hold events
+	const [transactions, setTransactions] = useState({}) // State to hold transactions
 
+	// Handle date click to open the event modal
 	const handleDateClick = value => {
 		setSelectedDate(value)
 		onEventOpen()
 	}
 
+	// Add event function
 	const addEvent = eventDetails => {
 		const dateKey = selectedDate.toISOString().split('T')[0] // Use ISO string for date key
 		const newEvent = { id: Date.now(), ...eventDetails } // Include hour and description
@@ -36,16 +45,17 @@ function CalendarModal() {
 		// Update the events state
 		setEvents(prevEvents => ({
 			...prevEvents,
-			[dateKey]: [...(prevEvents[dateKey] || []), newEvent], // Add new event to the array of events for the day
+			[dateKey]: [...(prevEvents[dateKey] || []), newEvent],
 		}))
-		onEventClose() // Close modal after adding event
+		// onEventClose() 
 	}
 
+	// Delete event function
 	const deleteEvent = eventId => {
 		const dateKey = selectedDate.toISOString().split('T')[0]
 		setEvents(prevEvents => ({
 			...prevEvents,
-			[dateKey]: prevEvents[dateKey].filter(event => event.id !== eventId), // Remove the event with the matching id
+			[dateKey]: prevEvents[dateKey].filter(event => event.id !== eventId),
 		}))
 	}
 
@@ -82,16 +92,50 @@ function CalendarModal() {
 				</ModalContent>
 			</Modal>
 
-			{/* Event Modal triggered on date click */}
+			{/* Event/Transaction Modal triggered on date click */}
 			{selectedDate && (
-				<Event
-					selectedDate={selectedDate}
-					isOpen={isEventOpen}
-					onClose={onEventClose}
-					addEvent={addEvent} // Pass addEvent function to Event component
-					deleteEvent={deleteEvent} // Pass deleteEvent function to Event component
-					events={events[selectedDate.toISOString().split('T')[0]] || []} // Pass events for the selected date
-				/>
+				<Modal isOpen={isEventOpen} onClose={onEventClose} size='md'>
+					<ModalOverlay />
+					<ModalContent>
+						<ModalHeader>{selectedDate.toDateString()}</ModalHeader>
+						<ModalCloseButton />
+						<ModalBody>
+							{/* Tabs for Events and Transactions */}
+							<Tabs variant='enclosed'>
+								<TabList>
+									<Tab>Events</Tab>
+									<Tab>Transactions</Tab>
+								</TabList>
+
+								<TabPanels>
+									{/* Events Tab */}
+									<TabPanel>
+										<Event
+											selectedDate={selectedDate}
+											events={events[selectedDate.toISOString().split('T')[0]] || []}
+											addEvent={addEvent}
+											deleteEvent={deleteEvent}
+										/>
+									</TabPanel>
+
+									{/* Transactions Tab */}
+									<TabPanel>
+										<TransactionList
+											selectedDate={selectedDate}
+											transactions={transactions[selectedDate.toISOString().split('T')[0]] || []}
+										/>
+									</TabPanel>
+								</TabPanels>
+							</Tabs>
+						</ModalBody>
+
+						<ModalFooter>
+							<Button colorScheme='blue' mr={3} onClick={onEventClose}>
+								Close
+							</Button>
+						</ModalFooter>
+					</ModalContent>
+				</Modal>
 			)}
 		</>
 	)

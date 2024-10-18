@@ -1,24 +1,20 @@
 import React from 'react'
 import { Textarea, FormLabel, Input, Box } from '@chakra-ui/react'
 
-const EventDetails = ({ selectedDate, eventDescription, setEventDescription, eventHour, setEventHour }) => {
+const EventDetails = ({ selectedDate, eventDescription, setEventDescription, setEventHour }) => {
 	return (
 		<Box>
 			{/* Show the selected date */}
 			<FormLabel>Date</FormLabel>
 			<Input value={selectedDate?.toDateString()} isReadOnly />
 
-			{/* Hour picker (for example, you can use an Input or a proper TimePicker component if needed) */}
+			{/* Hour picker */}
 			<FormLabel mt={4}>Select Hour</FormLabel>
-			<Input
-				type='time'
-				value={eventHour} // Bind value to eventHour state
-				onChange={e => setEventHour(e.target.value)} // Update eventHour state when user selects hour
-			/>
+			<Input type='time' onChange={e => setEventHour(e.target.value)} />
 
 			{/* Event description */}
 			<FormLabel mt={4} htmlFor='event-description'>
-				Title
+				Description
 			</FormLabel>
 			<Textarea
 				id='event-description'
