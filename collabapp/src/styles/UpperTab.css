@@ -59,12 +59,22 @@
     gap: 15px;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* Ensure that cards stay in a single row */
+    flex-wrap: wrap; /* Ensure that cards wrap to the next row */
     overflow-x: auto; /* Horizontal scrolling for overflow */
+    padding: 20px; /* Add padding to prevent cutting off borders */
 }
 
 .card-header {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.animated-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animated-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
