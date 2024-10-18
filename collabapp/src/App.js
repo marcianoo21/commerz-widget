@@ -1,11 +1,13 @@
 import './styles/App.css'
-import Calendar from './components/Calendar.jsx'
 import { ChakraProvider } from '@chakra-ui/react'
+import CalendarModal from './components/MainCalendar.jsx'
+import UpperTab from './components/UpperTab.jsx'
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
 	return (
 		<ChakraProvider>
-			<Calendar />
+			<UpperTab />
 		</ChakraProvider>
 	)
 }
