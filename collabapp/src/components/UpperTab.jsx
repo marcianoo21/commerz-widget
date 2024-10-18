@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/UpperTab.css';
 import CalendarModal from './MainCalendar';
+import MultipleCards from './MultipleCards';
 
 const UpperTab = () => {
     return (
@@ -25,6 +26,9 @@ const UpperTab = () => {
             </header>
             <div className="calendar-container">
             <CalendarModal />
+            </div>
+            <div className="multiple-cards">
+            <MultipleCards />    
             </div>
         </>
     );
