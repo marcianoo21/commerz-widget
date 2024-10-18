@@ -1,11 +1,12 @@
-import logo from './assets/images/logo.svg'
 import './styles/App.css'
+import Calendar from './components/Calendar.jsx'
+import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
 	return (
-		<div className='App'>
-			<p>mama</p>
-		</div>
+		<ChakraProvider>
+			<Calendar />
+		</ChakraProvider>
 	)
 }
 
