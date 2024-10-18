@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
 	Modal,
 	ModalOverlay,
@@ -6,90 +7,84 @@ import {
 	ModalBody,
 	ModalFooter,
 	Button,
-	Box,
 	Table,
 	Thead,
 	Tbody,
 	Tr,
 	Th,
 	Td,
-	FormLabel,
-	Input,
+	IconButton,
 } from '@chakra-ui/react'
-import { useState } from 'react'
-import EventDetails from './EventDetails' // Import EventDetails component
+import { DeleteIcon } from '@chakra-ui/icons' // Import the delete icon
+import EventDetails from './EventDetails'
 
-function Event({ selectedDate, isOpen, onClose, addEvent, events }) {
-	const [eventHour, setEventHour] = useState('') // State for event hour
+function Event({ selectedDate, isOpen, onClose, addEvent, events, deleteEvent }) {
+	// Pass deleteEvent function as a prop
 	const [eventDescription, setEventDescription] = useState('')
-	const [isAddingEvent, setIsAddingEvent] = useState(false) // State to handle adding an event
+	const [eventHour, setEventHour] = useState('') // State to track the selected hour
 
 	const handleAddEvent = () => {
-		// Create event details object with hour and description
+		// Pass the hour and description as part of the event details
 		const eventDetails = {
 			hour: eventHour,
 			description: eventDescription,
 		}
-		addEvent(eventDetails) // Pass the event details to addEvent function
-		setEventHour('') // Clear input fields
-		setEventDescription('')
-		setIsAddingEvent(false) // Close adding event form
+		addEvent(eventDetails) // Add the event via the parent callback
+		setEventDescription('') // Reset the description
+		setEventHour('') // Reset the hour
 	}
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size='md' isCentered>
+		<Modal isOpen={isOpen} onClose={onClose} size='md'>
 			<ModalOverlay />
 			<ModalContent>
-				<ModalHeader>Events for {selectedDate.toLocaleDateString()}</ModalHeader>
+				<ModalHeader>Events on {selectedDate?.toDateString()}</ModalHeader>
 				<ModalBody>
-					<Box>
-						{/* Display events in a table format or show a message if there are no events */}
-						{events.length > 0 ? (
-							<Table variant='simple'>
-								<Thead>
-									<Tr>
-										<Th>Hour</Th>
-										<Th>Description</Th>
+					{/* Display existing events for the selected date */}
+					{events.length > 0 ? (
+						<Table variant='simple'>
+							<Thead>
+								<Tr>
+									<Th>Hour</Th>
+									<Th>Description</Th>
+									<Th>Actions</Th> {/* Add an 'Actions' column for delete button */}
+								</Tr>
+							</Thead>
+							<Tbody>
+								{events.map(event => (
+									<Tr key={event.id}>
+										<Td>{event.hour}</Td>
+										<Td>{event.description}</Td>
+										<Td>
+											<IconButton
+												aria-label='Delete event'
+												icon={<DeleteIcon />}
+												onClick={() => deleteEvent(event.id)} // Call delete function with event id
+												colorScheme='red'
+											/>
+										</Td>
 									</Tr>
-								</Thead>
-								<Tbody>
-									{events.map(event => (
-										<Tr key={event.id}>
-											<Td>{event.hour}</Td>
-											<Td>{event.description}</Td>
-										</Tr>
-									))}
-								</Tbody>
-							</Table>
-						) : (
-							<Box textAlign='center' mb={4}>
-								No events for this day
-							</Box>
-						)}
+								))}
+							</Tbody>
+						</Table>
+					) : (
+						<p>No events for this day.</p>
+					)}
 
-						{/* Button to add a new event */}
-						<Button colorScheme='blue' onClick={() => setIsAddingEvent(true)}>
-							+ Add Event
-						</Button>
-
-						{/* If adding an event, show the form */}
-						{isAddingEvent && (
-							<Box mt={4}>
-								{/* Event description input */}
-								<EventDetails
-									selectedDate={selectedDate}
-									eventDescription={eventDescription}
-									setEventDescription={setEventDescription}
-								/>
-
-								<Button colorScheme='blue' onClick={handleAddEvent} mt={2}>
-									Add Event
-								</Button>
-							</Box>
-						)}
-					</Box>
+					{/* Event details form */}
+					<EventDetails
+						selectedDate={selectedDate}
+						eventDescription={eventDescription}
+						setEventDescription={setEventDescription}
+						eventHour={eventHour} // Pass hour state to EventDetails
+						setEventHour={setEventHour} // Pass hour setter to EventDetails
+					/>
 				</ModalBody>
+
 				<ModalFooter>
+					<Button colorScheme='blue' onClick={handleAddEvent}>
+						Add Event
+					</Button>
 					<Button variant='ghost' onClick={onClose}>
 						Close
 					</Button>
