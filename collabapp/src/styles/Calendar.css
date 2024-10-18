@@ -1,0 +1,38 @@
+/* Calendar.css */
+
+/* Make the calendar bigger */
+.react-calendar {
+	width: 70%; /* Ensure it takes full width of the container */
+	height: auto; /* Height will adjust based on content */
+	font-size: 1.2rem;
+	padding: 20px;
+	background-color: #f0f8ff; /* Light blue background */
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the individual days */
+.react-calendar__tile {
+	height: 80px; /* Specify height for tiles */
+	background-color: #fff;
+	border-radius: 8px;
+	transition: background-color 0.2s;
+	display: flex; /* Use flexbox for centering text */
+	justify-content: center; /* Center text horizontally */
+	align-items: center; /* Center text vertically */
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+	background-color: #ffd700; /* Gold background on hover */
+	color: #000;
+}
+
+.react-calendar__tile--now {
+	background-color: #ffb6c1 !important; /* Highlight current date */
+}
+
+.react-calendar__tile--active {
+	background-color: #4682b4 !important; /* Steel blue for selected date */
+	color: white;
+}

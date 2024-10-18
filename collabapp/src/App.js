@@ -1,11 +1,11 @@
 import './styles/App.css'
-import Calendar from './components/Calendar.jsx'
 import { ChakraProvider } from '@chakra-ui/react'
+import CalendarModal from './components/MainCalendar.jsx'
 
 function App() {
 	return (
 		<ChakraProvider>
-			<Calendar />
+			<CalendarModal />
 		</ChakraProvider>
 	)
 }
