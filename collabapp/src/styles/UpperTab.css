@@ -1,0 +1,55 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #073b4c; /* Dark teal color */
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav-menu a:hover {
+    color: #ffd166; /* Light yellow hover color */
+  }
+  
+  .social-media-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .social-media-icons a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  
+  .language-toggle {
+    background-color: #ef476f; /* Bright red color for language toggle */
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .language-toggle:hover {
+    background-color: #ff6d8b; /* Slightly lighter red on hover */
+  }
+  
+  .calendar-container {
+    margin-top: 20px; /* Dodaj margines, aby oddzielić kalendarz od górnego paska */
+    padding: 20px; /* Opcjonalnie dodaj padding */
+  }
