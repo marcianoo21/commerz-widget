@@ -1,5 +1,5 @@
 import { CalendarIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
 	Button,
 	Modal,
@@ -37,9 +37,28 @@ function CalendarModal() {
 		onEventOpen()
 	}
 
+	// Add dummy transactions when the component mounts
+	useEffect(() => {
+		// Dummy transactions for specific dates
+		const dummyTransactions = {
+			'2024-10-15': [
+				{ id: 1, amount: '$50', description: 'Grocery Shopping' },
+				{ id: 2, amount: '$20', description: 'Coffee with Friends' },
+			],
+			'2024-10-16': [{ id: 3, amount: '$100', description: 'Electronics Purchase' }],
+			'2024-10-17': [
+				{ id: 4, amount: '$150', description: 'Car Maintenance' },
+				{ id: 5, amount: '$30', description: 'Restaurant Bill' },
+			],
+		}
+
+		// Set the dummy transactions into state
+		setTransactions(dummyTransactions)
+	}, [])
+
 	// Add event function
 	const addEvent = eventDetails => {
-		const dateKey = selectedDate.toISOString().split('T')[0] // Use ISO string for date key
+		const dateKey = selectedDate.toLocaleDateString('en-CA') // Use local date key in 'YYYY-MM-DD' format
 		const newEvent = { id: Date.now(), ...eventDetails } // Include hour and description
 
 		// Update the events state
@@ -47,12 +66,12 @@ function CalendarModal() {
 			...prevEvents,
 			[dateKey]: [...(prevEvents[dateKey] || []), newEvent],
 		}))
-		// onEventClose() 
+		// onEventClose()
 	}
 
 	// Delete event function
 	const deleteEvent = eventId => {
-		const dateKey = selectedDate.toISOString().split('T')[0]
+		const dateKey = selectedDate.toLocaleDateString('en-CA') // Use local date key
 		setEvents(prevEvents => ({
 			...prevEvents,
 			[dateKey]: prevEvents[dateKey].filter(event => event.id !== eventId),
@@ -112,7 +131,7 @@ function CalendarModal() {
 									<TabPanel>
 										<Event
 											selectedDate={selectedDate}
-											events={events[selectedDate.toISOString().split('T')[0]] || []}
+											events={events[selectedDate.toLocaleDateString('en-CA')] || []}
 											addEvent={addEvent}
 											deleteEvent={deleteEvent}
 										/>
@@ -122,7 +141,7 @@ function CalendarModal() {
 									<TabPanel>
 										<TransactionList
 											selectedDate={selectedDate}
-											transactions={transactions[selectedDate.toISOString().split('T')[0]] || []}
+											transactions={transactions[selectedDate.toLocaleDateString('en-CA')] || []}
 										/>
 									</TabPanel>
 								</TabPanels>
