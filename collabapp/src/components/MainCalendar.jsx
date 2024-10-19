@@ -135,6 +135,18 @@ function CalendarModal() {
 		}))
 	}
 
+	// Function to edit an existing event
+	const editEvent = (eventId, updatedEventDetails) => {
+		const dateKey = selectedDate.toISOString().split('T')[0] // Get the date string
+
+		setEvents(prevEvents => ({
+			...prevEvents,
+			[dateKey]: prevEvents[dateKey].map(event =>
+				event.id === eventId ? { ...event, ...updatedEventDetails } : event
+			),
+		}))
+	}
+
 	// Add payment function
 	const addPayment = paymentDetails => {
 		const dateKey = selectedDate.toISOString().split('T')[0]
@@ -152,6 +164,17 @@ function CalendarModal() {
 		setPayments(prevPayments => ({
 			...prevPayments,
 			[dateKey]: prevPayments[dateKey].filter(payment => payment.id !== paymentId),
+		}))
+	}
+
+	const editPayment = (paymentId, updatedPaymentDetails) => {
+		const dateKey = selectedDate.toISOString().split('T')[0] // Get the date string
+
+		setPayments(prevPayments => ({
+			...prevPayments,
+			[dateKey]: prevPayments[dateKey].map(payment =>
+				payment.id === paymentId ? { ...payment, ...updatedPaymentDetails } : payment
+			),
 		}))
 	}
 
@@ -378,6 +401,7 @@ function CalendarModal() {
 											events={events[selectedDate.toISOString().split('T')[0]] || []}
 											addEvent={addEvent}
 											deleteEvent={deleteEvent}
+											editEvent={editEvent}
 										/>
 									</TabPanel>
 
@@ -388,6 +412,7 @@ function CalendarModal() {
 											payments={payments[selectedDate.toISOString().split('T')[0]] || []}
 											addPayment={addPayment}
 											deletePayment={deletePayment}
+											editPayment={editPayment}
 										/>
 									</TabPanel>
 
