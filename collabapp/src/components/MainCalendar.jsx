@@ -49,6 +49,14 @@ function CalendarModal() {
 				{ id: 4, amount: '$150', description: 'Car Maintenance' },
 				{ id: 5, amount: '$30', description: 'Restaurant Bill' },
 			],
+			'2024-10-13': [
+				{ id: 6, amount: '$650', description: 'Computer' },
+				{ id: 7, amount: '$30', description: 'Breakfast' },
+			],
+			'2024-10-04': [
+				{ id: 8, amount: '$250', description: 'Doctor' },
+				{ id: 9, amount: '$30', description: 'Spanish lesson' },
+			],
 		}
 
 		// Set the dummy transactions into state
@@ -103,7 +111,7 @@ function CalendarModal() {
 						height='14px'
 						top='86%'
 						left='65%'
-						color="red.400"
+						color='red.400'
 						// transform='translate(-50%, -50%)'
 					/>
 				)}
@@ -126,8 +134,8 @@ function CalendarModal() {
 
 	return (
 		<>
-			<Button leftIcon={<CalendarIcon />} colorScheme='red' variant='solid' onClick={onOpen}>
-				Open Calendar
+			<Button color='#0a3046' variant='solid' onClick={onOpen} size='2xl' overflow='hidden'>
+				<Calendar className='react-calendar-small' />
 			</Button>
 
 			{/* Main Calendar Modal */}

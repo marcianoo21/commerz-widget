@@ -25,7 +25,7 @@ const UpperTab = () => {
                 </div>
             </header>
             <div className="calendar-container">
-            <CalendarModal />
+            {/* <CalendarModal /> */}
             </div>
             <div className="multiple-cards">
             <MultipleCards />    
