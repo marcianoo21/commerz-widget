@@ -220,11 +220,93 @@ function CalendarModal() {
 						<ModalHeader>{selectedDate.toDateString()}</ModalHeader>
 						<ModalCloseButton />
 						<ModalBody>
-							<Tabs variant='enclosed'>
+							{/* Tabs with smooth underline effect */}
+							<Tabs variant='unstyled'>
 								<TabList>
-									<Tab>Events</Tab>
-									<Tab>Payments</Tab>
-									<Tab>Transactions</Tab>
+									<Tab
+										_focus={{ outline: 'none' }}
+										sx={{
+											position: 'relative',
+											padding: '10px',
+											fontWeight: 'bold',
+											_after: {
+												content: "''",
+												position: 'absolute',
+												width: '100%',
+												height: '2px',
+												bottom: '0',
+												left: '0',
+												backgroundColor: '#0a3046',
+												transform: 'scaleX(0)',
+												transformOrigin: 'right',
+												transition: 'transform 0.3s ease-in-out',
+											},
+											_selected: {
+												color: '#ffd700',
+												_after: {
+													transform: 'scaleX(1)',
+													transformOrigin: 'left',
+												},
+											},
+										}}>
+										Events
+									</Tab>
+									<Tab
+										_focus={{ outline: 'none' }}
+										sx={{
+											position: 'relative',
+											padding: '10px',
+											fontWeight: 'bold',
+											_after: {
+												content: "''",
+												position: 'absolute',
+												width: '100%',
+												height: '2px',
+												bottom: '0',
+												left: '0',
+												backgroundColor: '#0a3046',
+												transform: 'scaleX(0)',
+												transformOrigin: 'right',
+												transition: 'transform 0.3s ease-in-out',
+											},
+											_selected: {
+												color: '#ffd700',
+												_after: {
+													transform: 'scaleX(1)',
+													transformOrigin: 'left',
+												},
+											},
+										}}>
+										Payments
+									</Tab>
+									<Tab
+										_focus={{ outline: 'none' }}
+										sx={{
+											position: 'relative',
+											padding: '10px',
+											fontWeight: 'bold',
+											_after: {
+												content: "''",
+												position: 'absolute',
+												width: '100%',
+												height: '2px',
+												bottom: '0',
+												left: '0',
+												backgroundColor: '#0a3046',
+												transform: 'scaleX(0)',
+												transformOrigin: 'right',
+												transition: 'transform 0.3s ease-in-out',
+											},
+											_selected: {
+												color: '#ffd700',
+												_after: {
+													transform: 'scaleX(1)',
+													transformOrigin: 'left',
+												},
+											},
+										}}>
+										Transactions
+									</Tab>
 								</TabList>
 								<TabPanels>
 									{/* Events Tab */}
@@ -258,7 +340,7 @@ function CalendarModal() {
 							</Tabs>
 						</ModalBody>
 						<ModalFooter>
-							<Button colorScheme='teal' mr={3} onClick={onEventClose}>
+							<Button backgroundColor='#0a3046' color='#ffd700' mr={3} onClick={onEventClose}>
 								Close
 							</Button>
 						</ModalFooter>
