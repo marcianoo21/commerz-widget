@@ -20,14 +20,16 @@ import {
 } from '@chakra-ui/react';
 import EventDetails from './EventDetails'; // Assuming you already have the EventDetails component
 
-function Event({ selectedDate, events, addEvent, deleteEvent }) {
+function Event({ selectedDate, events, addEvent, deleteEvent, editEvent }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [eventDescription, setEventDescription] = useState('');
   const [eventHour, setEventHour] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentEventId, setCurrentEventId] = useState(null);
   const toast = useToast(); // Initialize useToast hook
 
-  // Handle adding the new event
-  const handleAddEvent = () => {
+  // Handle adding or editing the event
+  const handleSaveEvent = () => {
     if (!eventDescription || !eventHour) {
       toast({
         title: 'Warning',
@@ -37,18 +39,40 @@ function Event({ selectedDate, events, addEvent, deleteEvent }) {
         isClosable: true,
       });
     } else {
-      addEvent({ description: eventDescription, hour: eventHour });
-      setEventDescription(''); // Clear after adding
+      if (isEditing) {
+        editEvent(currentEventId, { description: eventDescription, hour: eventHour });
+        toast({
+          title: 'Success',
+          description: 'Event edited successfully.',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        addEvent({ description: eventDescription, hour: eventHour });
+        toast({
+          title: 'Success',
+          description: 'Event added successfully.',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+      setEventDescription(''); // Clear after adding or editing
       setEventHour('');
-      toast({
-        title: 'Success',
-        description: 'Event added successfully.',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
+      setIsEditing(false);
+      setCurrentEventId(null);
       onClose();
     }
+  };
+
+  // Handle opening the edit modal
+  const handleEditEvent = (event) => {
+    setEventDescription(event.description);
+    setEventHour(event.hour);
+    setCurrentEventId(event.id);
+    setIsEditing(true);
+    onOpen();
   };
 
   return (
@@ -68,7 +92,10 @@ function Event({ selectedDate, events, addEvent, deleteEvent }) {
                 <Td>{event.hour}</Td>
                 <Td>{event.description}</Td>
                 <Td>
-                  <Button colorScheme='red' size='sm' onClick={() => deleteEvent(event.id)}>
+                  <Button colorScheme='blue' size='sm' onClick={() => handleEditEvent(event)}>
+                    Edit
+                  </Button>
+                  <Button colorScheme='red' size='sm' ml={2} onClick={() => deleteEvent(event.id)}>
                     Delete
                   </Button>
                 </Td>
@@ -81,15 +108,15 @@ function Event({ selectedDate, events, addEvent, deleteEvent }) {
       )}
 
       {/* Button to add a new event */}
-      <Button colorScheme='green' mt={4} onClick={onOpen}>
+      <Button colorScheme='green' mt={4} onClick={() => { setIsEditing(false); onOpen(); }}>
         Add Event
       </Button>
 
-      {/* Modal for adding a new event */}
+      {/* Modal for adding or editing an event */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Event</ModalHeader>
+          <ModalHeader>{isEditing ? 'Edit Event' : 'Add New Event'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <EventDetails
@@ -100,8 +127,8 @@ function Event({ selectedDate, events, addEvent, deleteEvent }) {
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={handleAddEvent}>
-              Add Event
+            <Button colorScheme='blue' mr={3} onClick={handleSaveEvent}>
+              {isEditing ? 'Save Changes' : 'Add Event'}
             </Button>
             <Button variant='ghost' onClick={onClose}>
               Cancel
