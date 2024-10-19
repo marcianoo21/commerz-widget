@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
 	Table,
 	Thead,
@@ -25,23 +25,30 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 	const [paymentName, setPaymentName] = useState('')
 	const [paymentSurname, setPaymentSurname] = useState('')
 	const [paymentAccountNum, setPaymentAccountNum] = useState('')
+	const [paymentAmount, setPaymentAmount] = useState('') // New state for amount
 	const [isEditing, setIsEditing] = useState(false)
 	const [currentPaymentId, setCurrentPaymentId] = useState(null)
 	const toast = useToast()
 
 	// Handle adding or editing the payment
 	const handleSavePayment = () => {
-		if (!paymentName || !paymentSurname || !paymentAccountNum) {
+		if (!paymentName || !paymentSurname || !paymentAccountNum || !paymentAmount) {
+			// Validate all fields
 			toast({
 				title: 'Warning',
-				description: 'Please fill in all fields.',
+				description: 'Please fill in all fields, including amount.',
 				status: 'warning',
 				duration: 3000,
 				isClosable: true,
 			})
 		} else {
 			if (isEditing) {
-				editPayment(currentPaymentId, { name: paymentName, surname: paymentSurname, accountNum: paymentAccountNum })
+				editPayment(currentPaymentId, {
+					name: paymentName,
+					surname: paymentSurname,
+					accountNum: paymentAccountNum,
+					amount: paymentAmount, // Include amount
+				})
 				toast({
 					title: 'Success',
 					description: 'Payment edited successfully.',
@@ -50,7 +57,12 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					isClosable: true,
 				})
 			} else {
-				addPayment({ name: paymentName, surname: paymentSurname, accountNum: paymentAccountNum })
+				addPayment({
+					name: paymentName,
+					surname: paymentSurname,
+					accountNum: paymentAccountNum,
+					amount: paymentAmount, // Include amount
+				})
 				toast({
 					title: 'Success',
 					description: 'Payment added successfully.',
@@ -63,6 +75,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 			setPaymentName('')
 			setPaymentSurname('')
 			setPaymentAccountNum('')
+			setPaymentAmount('') // Clear amount field
 			setIsEditing(false)
 			setCurrentPaymentId(null)
 			onClose()
@@ -74,6 +87,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 		setPaymentName(payment.name)
 		setPaymentSurname(payment.surname)
 		setPaymentAccountNum(payment.accountNum)
+		setPaymentAmount(payment.amount) // Set the amount for editing
 		setCurrentPaymentId(payment.id)
 		setIsEditing(true)
 		onOpen()
@@ -88,6 +102,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 							<Th>Name</Th>
 							<Th>Surname</Th>
 							<Th>Account Number</Th>
+							<Th>Amount</Th> {/* New Amount column */}
 							<Th>Action</Th>
 						</Tr>
 					</Thead>
@@ -97,6 +112,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 								<Td>{payment.name}</Td>
 								<Td>{payment.surname}</Td>
 								<Td>{payment.accountNum}</Td>
+								<Td>{payment.amount}</Td> {/* Display amount */}
 								<Td>
 									<Button colorScheme='blue' size='sm' onClick={() => handleEditPayment(payment)}>
 										Edit
@@ -110,7 +126,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					</Tbody>
 				</Table>
 			) : (
-				<p>No payments added for this day.</p>
+				<p>No payments planned for this day.</p>
 			)}
 
 			{/* Button to add a new payment */}
@@ -121,7 +137,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					setIsEditing(false)
 					onOpen()
 				}}>
-				Add Payment
+				Plan Payment
 			</Button>
 
 			{/* Modal for adding or editing a payment */}
@@ -143,6 +159,13 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 								placeholder='Account Number'
 								value={paymentAccountNum}
 								onChange={e => setPaymentAccountNum(e.target.value)}
+								mb={2}
+							/>
+							<Input
+								placeholder='Amount'
+								type='number' // Ensure amount is a number
+								value={paymentAmount}
+								onChange={e => setPaymentAmount(e.target.value)}
 								mb={2}
 							/>
 						</Box>

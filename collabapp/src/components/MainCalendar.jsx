@@ -1,4 +1,4 @@
-import { CalendarIcon, InfoOutlineIcon } from '@chakra-ui/icons'
+import { CalendarIcon, InfoOutlineIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import {
 	Button,
@@ -23,7 +23,6 @@ import '../styles/Calendar.css'
 import Event from './Event' // Import Event component
 import Payments from './Payments' // Import Payments component
 import TransactionList from './TransactionList' // Import TransactionList component for transactions
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function CalendarModal() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -175,7 +174,9 @@ function CalendarModal() {
 				{hasEvents && (
 					<InfoOutlineIcon position='absolute' width='15px' height='15px' top='85%' left='85%' color='green.400' />
 				)}
-				{hasPayments && <FontAwesomeIcon icon='fa-solid fa-dollar-sign' />}
+				{hasPayments && (
+					<ArrowForwardIcon position='absolute' width='15px' height='15px' top='85%' left='85%' color='yellow.400' />
+				)}
 			</Box>
 		)
 	}
@@ -258,7 +259,7 @@ function CalendarModal() {
 						</ModalBody>
 						<ModalFooter>
 							<Button colorScheme='teal' mr={3} onClick={onEventClose}>
-								Open
+								Close
 							</Button>
 						</ModalFooter>
 					</ModalContent>
