@@ -93,7 +93,7 @@ function CalendarModal() {
 				},
 				{
 					id: 5,
-					amount: '-$30',
+					amount: '+$30',
 					description: 'Restaurant Bill',
 					operationType: 'Debit',
 					transactionType: 'Purchase',
