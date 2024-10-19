@@ -1,4 +1,4 @@
-import { CalendarIcon, WarningIcon } from '@chakra-ui/icons'
+import { CalendarIcon, WarningIcon, ChatIcon, BellIcon, InfoOutlineIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import {
 	Button,
@@ -95,27 +95,29 @@ function CalendarModal() {
 				margin='5px'
 				borderRadius='8px'>
 				{hasTransactions && (
-					<WarningIcon
+					<CalendarIcon
 						position='absolute'
-						bg='red.500'
-						borderRadius='full'
-						width='16px'
-						height='16px'
-						top='70%'
-						left='50%'
-						transform='translate(-50%, -50%)'
+						// bg='red.500'
+						// borderRadius='full'
+						width='14px'
+						height='14px'
+						bottom='87%'
+						left='30%'
+						color="red.400"
+						// transform='translate(-50%, -50%)'
 					/>
 				)}
 				{hasEvents && (
-					<CalendarIcon
+					<InfoOutlineIcon
 						position='absolute'
-						bg='yellow.500'
-						borderRadius='15%'
-						width='16px'
-						height='16px'
-						top='70%'
-						left='50%'
-						transform='translate(-50%, -50%)'
+						// bg='green.400'
+						// borderRadius='90%'
+						width='15px'
+						height='15px'
+						bottom='85%'
+						left='80%'
+						color='green.400'
+						// transform='translate(-50%, -50%)'
 					/>
 				)}
 			</Box>
