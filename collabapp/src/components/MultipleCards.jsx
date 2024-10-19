@@ -96,19 +96,19 @@ const MultipleCards = () => {
 						</Thead>
 						<Tbody>
 							<Tr>
-								<Td>2023-01-01</Td>
-								<Td color='red'>-100 PLN</Td>
-								<Td>Payment for services</Td>
+								<Td>2024-10-15</Td>
+								<Td color='red'>-$20</Td>
+								<Td>Coffee with Friends</Td>
 							</Tr>
 							<Tr>
-								<Td>2023-01-02</Td>
-								<Td color='red'>-200 PLN</Td>
-								<Td>Payment for goods</Td>
+								<Td>2024-10-16</Td>
+								<Td color='red'>-$100</Td>
+								<Td>Electronics Purchase</Td>
 							</Tr>
 							<Tr>
-								<Td>2023-01-03</Td>
-								<Td color='green'>+150 PLN</Td>
-								<Td>Refund</Td>
+								<Td>2024-10-17</Td>
+								<Td color='green'>+$30</Td>
+								<Td>Restaurant Bill</Td>
 							</Tr>
 						</Tbody>
 					</Table>
