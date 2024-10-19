@@ -101,8 +101,8 @@ function CalendarModal() {
 						// borderRadius='full'
 						width='14px'
 						height='14px'
-						bottom='87%'
-						left='60%'
+						top='86%'
+						left='65%'
 						color="red.400"
 						// transform='translate(-50%, -50%)'
 					/>
@@ -114,8 +114,8 @@ function CalendarModal() {
 						// borderRadius='90%'
 						width='15px'
 						height='15px'
-						bottom='85%'
-						left='80%'
+						top='85%'
+						left='85%'
 						color='green.400'
 						// transform='translate(-50%, -50%)'
 					/>
