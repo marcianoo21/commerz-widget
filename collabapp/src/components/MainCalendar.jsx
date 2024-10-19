@@ -102,7 +102,7 @@ function CalendarModal() {
 						width='14px'
 						height='14px'
 						bottom='87%'
-						left='30%'
+						left='60%'
 						color="red.400"
 						// transform='translate(-50%, -50%)'
 					/>
