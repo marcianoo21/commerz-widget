@@ -175,7 +175,7 @@ function CalendarModal() {
 					<InfoOutlineIcon position='absolute' width='15px' height='15px' top='85%' left='85%' color='green.400' />
 				)}
 				{hasPayments && (
-					<ArrowForwardIcon position='absolute' width='15px' height='15px' top='85%' left='85%' color='yellow.400' />
+					<ArrowForwardIcon position='absolute' width='15px' height='15px' top='85%' left='45%' color='yellow.400' />
 				)}
 			</Box>
 		)
