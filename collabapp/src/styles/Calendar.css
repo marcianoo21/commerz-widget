@@ -74,8 +74,9 @@
 }
 
 /* Change button color on hover */
-.react-calendar__navigation button:hover {
+.react-calendar .react-calendar__navigation button:hover {
 	color: #ffd700; /* White text on hover */
+	background-color: #0a3046;
 }
 
 /* Styles for the smaller calendar */
@@ -106,4 +107,10 @@
 .react-calendar-small .react-calendar__tile--now {
 	background-color: #0a3046 !important; /* Dark blue for current date */
 	color: #ffd700; /* Gold text for current date */
+}
+
+/* Change button color on hover */
+.react-calendar-small .react-calendar__navigation button:hover {
+	color: #ffd700; /* White text on hover */
+	background-color: #073b4c;
 }
