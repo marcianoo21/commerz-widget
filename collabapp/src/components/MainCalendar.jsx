@@ -198,7 +198,7 @@ function CalendarModal() {
 	// Get icons for events and transactions
 	const getTileContent = ({ date }) => {
 		const dateString = date.toLocaleDateString('en-CA') // Consistent date format
-		console.log('DATE:', dateString) // To debug if needed
+		// console.log('DATE:', dateString) // To debug if needed
 
 		const hasEvents = events[dateString] && events[dateString].length > 0
 		const hasTransactions = transactions[dateString] && transactions[dateString].length > 0
