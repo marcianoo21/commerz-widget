@@ -23,6 +23,7 @@ import '../styles/Calendar.css'
 import Event from './Event' // Import Event component
 import Payments from './Payments' // Import Payments component
 import TransactionList from './TransactionList' // Import TransactionList component for transactions
+import { SiCommerzbank  } from 'react-icons/si'
 
 function CalendarModal() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -152,10 +153,43 @@ function CalendarModal() {
 	// Get icons for events and transactions
 	const getTileContent = ({ date }) => {
 		const dateString = date.toISOString().split('T')[0]
+		console.log('DATE:' ,dateString)
 		const hasEvents = events[dateString] && events[dateString].length > 0
 		const hasTransactions = transactions[dateString] && transactions[dateString].length > 0
 		const hasPayments = payments[dateString] && payments[dateString].length > 0
+		const specificIconDates = ['2024-10-13', '2024-10-27', '2024-10-16'];
 
+		if (specificIconDates.includes(dateString)) {
+			return (
+				<Box 
+				position='relative'
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				justifyContent='flex-start'
+				width='100%'
+				height='100%'
+				p={2}
+				margin='5px'
+				borderRadius='8px'>
+				<SiCommerzbank  
+					  style={{ 
+						position: 'absolute', width:'14px', height:'14px', top:'86%', left:'25%', color:'yellow.400',
+					}} 
+				/>
+				{hasTransactions && (
+					<CalendarIcon position='absolute' width='14px' height='14px' top='86%' left='65%' color='red.400' />
+				)}
+				{hasEvents && (
+					<InfoOutlineIcon position='absolute' width='15px' height='15px' top='85%' left='85%' color='green.400' />
+				)}
+				{hasPayments && (
+					<ArrowForwardIcon position='absolute' width='15px' height='15px' top='85%' left='45%' color='yellow.400' />
+				)}
+			</Box>
+			)
+		}
+		
 		return (
 			<Box
 				position='relative'
