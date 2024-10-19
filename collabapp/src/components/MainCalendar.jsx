@@ -116,7 +116,8 @@ function CalendarModal() {
 
 	// Add event function
 	const addEvent = eventDetails => {
-		const dateKey = selectedDate.toISOString().split('T')[0]
+		// Strip the time part to avoid timezone issues
+		const dateKey = selectedDate.toLocaleDateString('en-CA') // YYYY-MM-DD format without time
 		const newEvent = { id: Date.now(), ...eventDetails }
 
 		setEvents(prevEvents => ({
@@ -173,8 +174,9 @@ function CalendarModal() {
 
 	// Get icons for events and transactions
 	const getTileContent = ({ date }) => {
-		const dateString = date.toISOString().split('T')[0]
-		console.log('DATE:', dateString)
+		const dateString = date.toLocaleDateString('en-CA') // Consistent date format
+		console.log('DATE:', dateString) // To debug if needed
+
 		const hasEvents = events[dateString] && events[dateString].length > 0
 		const hasTransactions = transactions[dateString] && transactions[dateString].length > 0
 		const hasPayments = payments[dateString] && payments[dateString].length > 0
