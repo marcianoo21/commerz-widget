@@ -109,7 +109,8 @@ function Event({ selectedDate, events, addEvent, deleteEvent, editEvent }) {
 
 			{/* Button to add a new event */}
 			<Button
-				colorScheme='green'
+				backgroundColor='#0a3046'
+				color='#ffd700'
 				mt={4}
 				onClick={() => {
 					setIsEditing(false)
