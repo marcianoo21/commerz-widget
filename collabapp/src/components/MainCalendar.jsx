@@ -114,6 +114,105 @@ function CalendarModal() {
 		setTransactions(dummyTransactions)
 	}, [])
 
+	const dummyBankEvents = {
+		'2024-10-13': [
+			{
+				id: 1,
+				title: 'Bank Statement Available',
+				description: 'Your monthly bank statement is ready.',
+				eventType: 'Notification',
+				eventDate: '2024-10-13',
+				hour: '10:00 AM',
+				isBankEvent: true, // Identifying as a bank event
+			},
+		],
+		'2024-10-16': [
+			{
+				id: 2,
+				title: 'Interest Payment Received',
+				description: 'Interest payment credited to your account.',
+				eventType: 'Transaction',
+				eventDate: '2024-10-16',
+				hour: '2:00 PM',
+				isBankEvent: true, // Identifying as a bank event
+			},
+		],
+		'2024-10-27': [
+			{
+				id: 3,
+				title: 'New Account Offer',
+				description: 'Exclusive offer for new accounts available.',
+				eventType: 'Promotion',
+				eventDate: '2024-10-27',
+				hour: '9:00 AM',
+				isBankEvent: true, // Identifying as a bank event
+			},
+		],
+		'2024-10-04': [
+			{
+				id: 4,
+				title: 'New Account Offer',
+				description: 'Exclusive offer for new accounts available.',
+				eventType: 'Promotion',
+				eventDate: '2024-10-04',
+				hour: '9:00 AM',
+				isBankEvent: true, // Identifying as a bank event
+			},
+		],
+		'2024-10-01': [
+			{
+				id: 4,
+				title: 'New Account Offer',
+				description: 'Exclusive offer for new accounts available.',
+				eventType: 'Promotion',
+				eventDate: '2024-10-01',
+				hour: '9:00 AM',
+				isBankEvent: true, // Identifying as a bank event
+			},
+		],
+	}
+
+	const normalEvents = {
+		'2024-10-20': [
+			{
+				id: 5,
+				title: 'Regular Event',
+				description: 'Just a regular event.',
+				eventType: 'Notification',
+				eventDate: '2024-10-20',
+				hour: '11:00 AM',
+				isBankEvent: false, // Identifying as a normal event
+			},
+		],
+		'2024-10-29': [
+			{
+				id: 6,
+				title: 'Regular Event',
+				description: 'Just a regular event.',
+				eventType: 'Notification',
+				eventDate: '2024-10-29',
+				hour: '11:00 AM',
+				isBankEvent: false, // Identifying as a normal event
+			},
+		],
+		'2024-10-14': [
+			{
+				id: 7,
+				title: 'Regular Event',
+				description: 'Just a regular event.',
+				eventType: 'Notification',
+				eventDate: '2024-10-14',
+				hour: '11:00 AM',
+				isBankEvent: false, // Identifying as a normal event
+			},
+		],
+	}
+
+	useEffect(() => {
+		const allEvents = { ...dummyBankEvents, ...normalEvents } // Combine the events
+		setEvents(allEvents)
+	}, [])
+
 	// Add event function
 	const addEvent = eventDetails => {
 		// Strip the time part to avoid timezone issues
@@ -196,44 +295,13 @@ function CalendarModal() {
 	}
 
 	// Get icons for events and transactions
+	// Updated getTileContent function
 	const getTileContent = ({ date }) => {
-		const dateString = date.toLocaleDateString('en-CA') // Consistent date format
-		console.log('DATE:', dateString) // To debug if needed
-
-		const hasEvents = events[dateString] && events[dateString].length > 0
+		const dateString = date.toLocaleDateString('en-CA')
 		const hasTransactions = transactions[dateString] && transactions[dateString].length > 0
 		const hasPayments = payments[dateString] && payments[dateString].length > 0
-		const specificIconDates = ['2024-10-13', '2024-10-27', '2024-10-16']
-
-		if (specificIconDates.includes(dateString)) {
-			return (
-				<Box
-					position='relative'
-					display='flex'
-					flexDirection='column'
-					alignItems='center'
-					justifyContent='flex-start'
-					width='100%'
-					height='100%'
-					p={2}
-					margin='5px'
-					borderRadius='8px'>
-					<SiCommerzbank
-						style={{
-							position: 'absolute',
-							width: '18px',
-							height: '18px',
-							top: '84%',
-							left: '25%',
-							color: 'yellow.400',
-						}}
-					/>
-					{hasTransactions && <ArrowBackIcon position='absolute' boxSize={5} top='80%' left='65%' color='red.400' />}
-					{hasEvents && <CalendarIcon position='absolute' boxSize={5} top='80%' left='85%' color='green.400' />}
-					{hasPayments && <ArrowForwardIcon position='absolute' boxSize={5} top='80%' left='45%' color='yellow.400' />}
-				</Box>
-			)
-		}
+		const hasBankEvents = events[dateString] && events[dateString].some(event => event.isBankEvent)
+		const hasNormalEvents = events[dateString] && events[dateString].some(event => !event.isBankEvent)
 
 		return (
 			<Box
@@ -247,9 +315,21 @@ function CalendarModal() {
 				p={2}
 				margin='5px'
 				borderRadius='8px'>
-				{hasTransactions && <ArrowBackIcon position='absolute' boxSize={5} top='80%' left='65%' color='red.400' />}
-				{hasEvents && <CalendarIcon position='absolute' boxSize={5} top='80%' left='85%' color='green.400' />}
-				{hasPayments && <ArrowForwardIcon position='absolute' boxSize={5} top='80%' left='45%' color='yellow.400' />}
+				{hasBankEvents && (
+					<SiCommerzbank
+						style={{
+							position: 'absolute',
+							width: '22px',
+							height: '22px',
+							top: '72%',
+							left: '10%',
+							color: 'yellow.400',
+						}}
+					/>
+				)}
+				{hasNormalEvents && <CalendarIcon position='absolute' boxSize={6} top='70%' left='85%' color='green.400' />}
+				{hasPayments && <ArrowForwardIcon position='absolute' boxSize={6} top='70%' left='35%' color='yellow.400' />}
+				{hasTransactions && <ArrowBackIcon position='absolute' boxSize={6} top='70%' left='60%' color='red.400' />}
 			</Box>
 		)
 	}
@@ -257,7 +337,7 @@ function CalendarModal() {
 	return (
 		<>
 			<Button color='#0a3046' variant='solid' onClick={onOpen} size='2xl' overflow='hidden'>
-				<Calendar className='react-calendar-small' />
+				<Calendar className='react-calendar-small' locale='en-EN' />
 			</Button>
 
 			{/* Main Calendar Modal */}
@@ -274,6 +354,7 @@ function CalendarModal() {
 								onClickDay={handleDateClick}
 								className='react-calendar'
 								tileContent={getTileContent}
+								locale='en-EN'
 							/>
 						</Box>
 						<IconLegend />
