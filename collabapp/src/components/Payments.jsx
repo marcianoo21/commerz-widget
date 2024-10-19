@@ -115,10 +115,10 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 		<Box width='100%'>
 			{/* Current balance and future balance section */}
 			<Box mb={4} p={4} bg='#0a3046' borderRadius='md'>
-				<Text fontSize='lg' fontWeight='bold' color='#ffd700'>
+				<Text fontSize='lg' color='#ffd700'>
 					Current Balance: {currentBalance} €
 				</Text>
-				<Text fontSize='lg' fontWeight='bold' color={futureBalance < 0 ? 'red.500' : '#ffd700'}>
+				<Text fontSize='lg' color={futureBalance < 0 ? 'red.500' : '#ffd700'}>
 					Projected Balance after Planned Payments: {futureBalance} €
 				</Text>
 			</Box>

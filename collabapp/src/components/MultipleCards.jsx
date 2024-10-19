@@ -1,20 +1,20 @@
 import React from 'react'
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Text,
-    Heading,
-    Button,
-    Box,
-    SimpleGrid,
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
+	Card,
+	CardHeader,
+	CardBody,
+	CardFooter,
+	Text,
+	Heading,
+	Button,
+	Box,
+	SimpleGrid,
+	Table,
+	Thead,
+	Tbody,
+	Tr,
+	Th,
+	Td,
 } from '@chakra-ui/react'
 import { FaChartBar, FaUsers, FaCalendarAlt, FaMoneyCheckAlt, FaEnvelope, FaHistory } from 'react-icons/fa' // Import ikon z Font Awesome
 import '../styles/UpperTab.css' // Upewnij się, że importujesz odpowiedni plik CSS
@@ -23,14 +23,14 @@ import CalendarModal from './MainCalendar'
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts'
 
 const dataPie = [
-    { name: 'Available Funds', value: 5000 },
-    { name: 'Used Funds', value: 5000 },
+	{ name: 'Available Funds', value: 5000 },
+	{ name: 'Used Funds', value: 5000 },
 ]
 
 const dataLine = [
-    { date: '2024-10-15', amount: -20 },
-    { date: '2024-10-16', amount: -100 },
-    { date: '2024-10-17', amount: 30 },
+	{ date: '2024-10-15', amount: -20 },
+	{ date: '2024-10-16', amount: -100 },
+	{ date: '2024-10-17', amount: 30 },
 ]
 
 const dataCustomerPie = [
