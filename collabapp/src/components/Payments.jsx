@@ -158,7 +158,7 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 						</Tbody>
 					</Table>
 				) : (
-					<p>No payments added for this day.</p>
+					<p>No payments planned for this day.</p>
 				)}
 
 				{/* Button to add a new payment */}
