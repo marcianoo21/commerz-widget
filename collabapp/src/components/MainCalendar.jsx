@@ -36,10 +36,12 @@ function CalendarModal() {
 	const [payments, setPayments] = useState([]) // State for payments
 
 	// Handle date click to open the event modal
-	const handleDateClick = value => {
-		setSelectedDate(value)
-		onEventOpen()
-	}
+    const handleDateClick = value => {
+        // Ustawienie daty bez różnicy stref czasowych
+        const selected = new Date(value.getTime() - value.getTimezoneOffset() * 60000);
+        setSelectedDate(selected);
+        onEventOpen();
+    }
 
 	// Add dummy transactions when the component mounts
 	useEffect(() => {
