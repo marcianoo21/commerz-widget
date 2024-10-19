@@ -22,7 +22,7 @@
 	justify-content: center; /* Center text horizontally */
 	align-items: center; /* Center text vertically */
 	color: #073b4c; /* Default text color */
-	margin: 5px; /* Add margin for space between tiles */
+	/* margin: 12px !important; */
 }
 
 /* Hover effect for tiles */

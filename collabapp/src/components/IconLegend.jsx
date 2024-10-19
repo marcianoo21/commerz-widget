@@ -10,7 +10,7 @@ const IconLegend = () => {
 			</Text>
 			<HStack spacing={4}>
 				<HStack>
-					<Icon as={SiCommerzbank} boxSize={6} color='yellow.400' />
+					<Icon as={SiCommerzbank} boxSize={6} color='#0a3046' />
 					<Text>Bank event</Text>
 				</HStack>
 				<HStack>

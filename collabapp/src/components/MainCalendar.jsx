@@ -16,6 +16,7 @@ import {
 	TabPanels,
 	Tab,
 	TabPanel,
+	Text,
 } from '@chakra-ui/react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
@@ -36,12 +37,12 @@ function CalendarModal() {
 	const [payments, setPayments] = useState([]) // State for payments
 
 	// Handle date click to open the event modal
-    const handleDateClick = value => {
-        // Ustawienie daty bez różnicy stref czasowych
-        const selected = new Date(value.getTime() - value.getTimezoneOffset() * 60000);
-        setSelectedDate(selected);
-        onEventOpen();
-    }
+	const handleDateClick = value => {
+		// Ustawienie daty bez różnicy stref czasowych
+		const selected = new Date(value.getTime() - value.getTimezoneOffset() * 60000)
+		setSelectedDate(selected)
+		onEventOpen()
+	}
 
 	// Add dummy transactions when the component mounts
 	useEffect(() => {
@@ -153,6 +154,23 @@ function CalendarModal() {
 		}))
 	}
 
+	const calculateMonthlyExpenses = () => {
+		const currentMonth = date.getMonth()
+		const currentYear = date.getFullYear()
+		let totalExpenses = 0
+
+		Object.values(transactions).forEach(transactionArray => {
+			transactionArray.forEach(transaction => {
+				const transactionDate = new Date(transaction.transactionDate)
+				if (transactionDate.getMonth() === currentMonth && transactionDate.getFullYear() === currentYear) {
+					totalExpenses += Math.abs(parseFloat(transaction.amount.replace(/[^0-9.-]+/g, ''))) // Sum only negative amounts
+				}
+			})
+		})
+
+		return totalExpenses.toFixed(2)
+	}
+
 	// Get icons for events and transactions
 	const getTileContent = ({ date }) => {
 		const dateString = date.toISOString().split('T')[0]
@@ -234,6 +252,17 @@ function CalendarModal() {
 							/>
 						</Box>
 						<IconLegend />
+						<Text
+							fontSize='lg'
+							fontWeight='bold'
+							mt={4}
+							color='#0a3046'
+							textDecoration='underline'
+							textDecorationColor='#ffd700' // Yellow underline
+							textDecorationThickness='2px' // Optional: change the thickness of the underline
+						>
+							Monthly Expense Summary: ${calculateMonthlyExpenses()}
+						</Text>
 					</ModalBody>
 					<ModalFooter>
 						<Button backgroundColor='#0a3046' color='#ffd700' mr={3} onClick={onClose}>
