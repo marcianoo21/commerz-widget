@@ -9,6 +9,7 @@
 	background-color: #073b4c; /* Main background color for the calendar */
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
 }
 
 /* Styling the individual days */
@@ -22,7 +23,7 @@
 	justify-content: center; /* Center text horizontally */
 	align-items: center; /* Center text vertically */
 	color: #073b4c; /* Default text color */
-	margin: 5px; /* Add margin for space between tiles */
+	margin: 12px !important;
 }
 
 /* Hover effect for tiles */
@@ -101,7 +102,7 @@
 	justify-content: center; /* Center text horizontally */
 	align-items: center; /* Center text vertically */
 	color: #073b4c; /* Default text color */
-	margin-bottom: 5px;
+	margin: 5px;
 }
 
 .react-calendar-small .react-calendar__tile:enabled:hover,
