@@ -17,10 +17,6 @@ const MailsAutomate = () => {
       event: 'appointment',
       event_date: '21.10.2024',
     };
-    console.log('Service ID:',  process.env.REACT_APP_SERVICE_ID);
-    console.log('Template ID:', process.env.REACT_APP_TEMPLATE_ID);
-    console.log('User ID:', process.env.REACT_APP_PUBLIC_KEY);
-    console.log("TEST")
 
     emailjs
       .send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, templateParams, process.env.REACT_APP_PUBLIC_KEY)
