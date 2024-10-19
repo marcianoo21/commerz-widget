@@ -25,18 +25,19 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 	const [paymentName, setPaymentName] = useState('')
 	const [paymentSurname, setPaymentSurname] = useState('')
 	const [paymentAccountNum, setPaymentAccountNum] = useState('')
-	const [paymentAmount, setPaymentAmount] = useState('') // New state for amount
+	const [paymentAmount, setPaymentAmount] = useState('')
+	const [paymentTime, setPaymentTime] = useState('') // New state for payment time
 	const [isEditing, setIsEditing] = useState(false)
 	const [currentPaymentId, setCurrentPaymentId] = useState(null)
 	const toast = useToast()
 
 	// Handle adding or editing the payment
 	const handleSavePayment = () => {
-		if (!paymentName || !paymentSurname || !paymentAccountNum || !paymentAmount) {
-			// Validate all fields
+		if (!paymentName || !paymentSurname || !paymentAccountNum || !paymentAmount || !paymentTime) {
+			// Validate all fields including time
 			toast({
 				title: 'Warning',
-				description: 'Please fill in all fields, including amount.',
+				description: 'Please fill in all fields, including time.',
 				status: 'warning',
 				duration: 3000,
 				isClosable: true,
@@ -47,7 +48,8 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					name: paymentName,
 					surname: paymentSurname,
 					accountNum: paymentAccountNum,
-					amount: paymentAmount, // Include amount
+					amount: paymentAmount,
+					time: paymentTime, // Include time in edited payment
 				})
 				toast({
 					title: 'Success',
@@ -61,7 +63,8 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					name: paymentName,
 					surname: paymentSurname,
 					accountNum: paymentAccountNum,
-					amount: paymentAmount, // Include amount
+					amount: paymentAmount,
+					time: paymentTime, // Include time in new payment
 				})
 				toast({
 					title: 'Success',
@@ -75,7 +78,8 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 			setPaymentName('')
 			setPaymentSurname('')
 			setPaymentAccountNum('')
-			setPaymentAmount('') // Clear amount field
+			setPaymentAmount('')
+			setPaymentTime('') // Clear time field
 			setIsEditing(false)
 			setCurrentPaymentId(null)
 			onClose()
@@ -87,7 +91,8 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 		setPaymentName(payment.name)
 		setPaymentSurname(payment.surname)
 		setPaymentAccountNum(payment.accountNum)
-		setPaymentAmount(payment.amount) // Set the amount for editing
+		setPaymentAmount(payment.amount)
+		setPaymentTime(payment.time) // Set time for editing
 		setCurrentPaymentId(payment.id)
 		setIsEditing(true)
 		onOpen()
@@ -102,17 +107,19 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 							<Th>Name</Th>
 							<Th>Surname</Th>
 							<Th>Account Number</Th>
-							<Th>Amount</Th> {/* New Amount column */}
+							<Th>Amount</Th>
+							<Th>Time</Th> {/* New Time column */}
 							<Th>Action</Th>
 						</Tr>
 					</Thead>
 					<Tbody>
 						{payments.map(payment => (
 							<Tr key={payment.id}>
-								<Td>{payment.name}</Td>
+								<Td>{payment.name} </Td>
 								<Td>{payment.surname}</Td>
 								<Td>{payment.accountNum}</Td>
-								<Td>{payment.amount}</Td> {/* Display amount */}
+								<Td>{payment.amount} </Td>
+								<Td>{payment.time}</Td> {/* Display planned time */}
 								<Td>
 									<Button colorScheme='blue' size='sm' onClick={() => handleEditPayment(payment)}>
 										Edit
@@ -126,12 +133,13 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 					</Tbody>
 				</Table>
 			) : (
-				<p>No payments planned for this day.</p>
+				<p>No payments added for this day.</p>
 			)}
 
 			{/* Button to add a new payment */}
 			<Button
-				colorScheme='green'
+				backgroundColor='#0a3046'
+				color='#ffd700'
 				mt={4}
 				onClick={() => {
 					setIsEditing(false)
@@ -162,16 +170,23 @@ const Payments = ({ payments, addPayment, deletePayment, editPayment }) => {
 								mb={2}
 							/>
 							<Input
-								placeholder='Amount'
+								placeholder='Amount €'
 								type='number' // Ensure amount is a number
 								value={paymentAmount}
 								onChange={e => setPaymentAmount(e.target.value)}
 								mb={2}
 							/>
+							<Input
+								placeholder='Time (e.g., 14:30)'
+								type='time' // Input field for time
+								value={paymentTime}
+								onChange={e => setPaymentTime(e.target.value)}
+								mb={2}
+							/>
 						</Box>
 					</ModalBody>
 					<ModalFooter>
-						<Button colorScheme='blue' mr={3} onClick={handleSavePayment}>
+						<Button backgroundColor='#0a3046' color='#ffd700' mr={3} onClick={handleSavePayment}>
 							{isEditing ? 'Save Changes' : 'Add Payment'}
 						</Button>
 						<Button variant='ghost' onClick={onClose}>
