@@ -24,7 +24,7 @@ import CalendarModal from './MainCalendar'
 const MultipleCards = () => {
 	return (
 		<SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={4} padding={4}>
-			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='520px'>
+			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='460px'>
 				<CardHeader textAlign='center'>
 					<Box display='flex' alignItems='center' justifyContent='center'>
 						<CalendarIcon style={{ marginRight: '8px' }} />
@@ -36,11 +36,8 @@ const MultipleCards = () => {
 						<CalendarModal />
 					</Box>
 				</CardBody>
-				<CardFooter display='flex' justifyContent='center'>
-					<Button>Detailed View</Button>
-				</CardFooter>
 			</Card>
-			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='520px'>
+			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='460px'>
 				<CardHeader textAlign='center'>
 					<Box display='flex' alignItems='center' justifyContent='center'>
 						<FaMoneyCheckAlt style={{ marginRight: '8px' }} />
@@ -59,7 +56,7 @@ const MultipleCards = () => {
 					<Button>Detailed View</Button>
 				</CardFooter>
 			</Card>
-			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='520px'>
+			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='460px'>
 				<CardHeader textAlign='center'>
 					<Box display='flex' alignItems='center' justifyContent='center'>
 						<FaEnvelope style={{ marginRight: '8px' }} />
@@ -81,7 +78,7 @@ const MultipleCards = () => {
 					<Button>View Messages</Button>
 				</CardFooter>
 			</Card>
-			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='520px'>
+			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='460px'>
 				<CardHeader textAlign='center'>
 					<Box display='flex' alignItems='center' justifyContent='center'>
 						<FaHistory style={{ marginRight: '8px' }} />
@@ -120,7 +117,7 @@ const MultipleCards = () => {
 					<Button>View Full History</Button>
 				</CardFooter>
 			</Card>
-			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='520px'>
+			<Card className='animated-card' backgroundColor='#F0FFF0' boxShadow='md' height='460px'>
 				<CardHeader textAlign='center'>
 					<Box display='flex' alignItems='center' justifyContent='center'>
 						<FaCalendarAlt style={{ marginRight: '8px' }} />

@@ -159,7 +159,7 @@ function CalendarModal() {
 					</ModalBody>
 
 					<ModalFooter>
-						<Button colorScheme='blue' mr={3} onClick={onClose}>
+						<Button backgroundColor='#0a3046' color='#ffd700' mr={3} onClick={onClose} className='button-close'>
 							Close
 						</Button>
 					</ModalFooter>
@@ -204,8 +204,8 @@ function CalendarModal() {
 						</ModalBody>
 
 						<ModalFooter>
-							<Button colorScheme='blue' mr={3} onClick={onEventClose}>
-								Close
+							<Button colorScheme='teal' mr={3} onClick={onEventClose}>
+								Open
 							</Button>
 						</ModalFooter>
 					</ModalContent>

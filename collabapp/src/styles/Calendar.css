@@ -14,7 +14,6 @@
 /* Styling the individual days */
 .react-calendar__tile {
 	height: 80px; /* Specify height for tiles */
-
 	background-color: #fff; /* Default tile background color */
 	border: 1px solid #ccc; /* Add a light gray border around each tile */
 	border-radius: 8px; /* Optional: rounded corners */
@@ -31,6 +30,7 @@
 .react-calendar__tile:enabled:focus {
 	background-color: #ffd700; /* Gold background on hover */
 	color: #000; /* Text color on hover */
+	border: 2px solid #0a3046;
 }
 /* Hover effect for tiles */
 .react-calendar__tile:enabled:hover,
@@ -92,16 +92,23 @@
 }
 
 .react-calendar-small .react-calendar__tile {
-	height: 18px; /* Specify height for tiles */
+	height: 36px; /* Specify height for tiles */
 	background-color: #fff; /* Default tile background color */
-	border: 1px solid #ccc; /* Add a light gray border around each tile */
+	border: 1px solid #ffd700; /* Add a light gray border around each tile */
 	border-radius: 8px; /* Optional: rounded corners */
 	transition: background-color 0.2s, color 0.2s; /* Add transition for color change */
 	display: flex; /* Use flexbox for centering text */
 	justify-content: center; /* Center text horizontally */
 	align-items: center; /* Center text vertically */
 	color: #073b4c; /* Default text color */
-	margin: 5px; /* Add margin for space between tiles */
+	margin-bottom: 5px;
+}
+
+.react-calendar-small .react-calendar__tile:enabled:hover,
+.react-calendar-small .react-calendar__tile:enabled:focus {
+	background-color: #ffd700; /* Gold background on hover */
+	color: #000; /* Text color on hover */
+	border: 2px solid #0a3046;
 }
 
 .react-calendar-small .react-calendar__tile--now {
@@ -113,4 +120,9 @@
 .react-calendar-small .react-calendar__navigation button:hover {
 	color: #ffd700; /* White text on hover */
 	background-color: #073b4c;
+}
+
+.button-close:hover {
+	background-color: #ffd700;
+	color: #0a3046;
 }
