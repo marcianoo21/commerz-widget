@@ -34,7 +34,7 @@ const dataLine = [
 ]
 
 const dataCustomerPie = [
-    { name: 'New Customers', value: 400 },
+    { name: 'New Customers', value: 600 },
     { name: 'Returning Customers', value: 300 },
 ]
 
@@ -190,27 +190,29 @@ const MultipleCards = () => {
                             </Pie>
                         </PieChart>
                     </Box>
-                    <Table variant='simple' mt={4}>
-                        <Thead>
-                            <Tr>
-                                <Th>Name</Th>
-                                <Th>Email</Th>
-                                <Th>Status</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            <Tr>
-                                <Td>John Doe</Td>
-                                <Td>john.doe@example.com</Td>
-                                <Td>New</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>Jane Smith</Td>
-                                <Td>jane.smith@example.com</Td>
-                                <Td>Returning</Td>
-                            </Tr>
-                        </Tbody>
-                    </Table>
+                    <Box overflowX='auto' width='100%'>
+                        <Table variant='simple' mt={4} size='sm'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Name</Th>
+                                    <Th>Email</Th>
+                                    <Th>Status</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                <Tr>
+                                    <Td>John Doe</Td>
+                                    <Td>john.doe@example.com</Td>
+                                    <Td>New</Td>
+                                </Tr>
+                                <Tr>
+                                    <Td>Jane Smith</Td>
+                                    <Td>jane.smith@example.com</Td>
+                                    <Td>Returning</Td>
+                                </Tr>
+                            </Tbody>
+                        </Table>
+                    </Box>
                 </CardBody>
                 <CardFooter display='flex' justifyContent='center'>
                     <Button>View Here</Button>
