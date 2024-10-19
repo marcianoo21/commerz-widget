@@ -2,7 +2,7 @@
 
 /* Make the calendar bigger */
 .react-calendar {
-	width: 70%; /* Ensure it takes full width of the container */
+	width: 100%; /* Ensure it takes full width of the container */
 	height: auto; /* Height will adjust based on content */
 	font-size: 1.2rem;
 	padding: 20px;
@@ -15,12 +15,14 @@
 .react-calendar__tile {
 	height: 80px; /* Specify height for tiles */
 	background-color: #fff; /* Default tile background color */
-	border-radius: 8px;
+	border: 1px solid #ccc; /* Add a light gray border around each tile */
+	border-radius: 8px; /* Optional: rounded corners */
 	transition: background-color 0.2s, color 0.2s; /* Add transition for color change */
 	display: flex; /* Use flexbox for centering text */
 	justify-content: center; /* Center text horizontally */
 	align-items: center; /* Center text vertically */
 	color: #073b4c; /* Default text color */
+	margin: 5px; /* Add margin for space between tiles */
 }
 
 /* Hover effect for tiles */

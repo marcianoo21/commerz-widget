@@ -1,4 +1,4 @@
-import { CalendarIcon } from '@chakra-ui/icons'
+import { CalendarIcon, WarningIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import {
 	Button,
@@ -39,7 +39,6 @@ function CalendarModal() {
 
 	// Add dummy transactions when the component mounts
 	useEffect(() => {
-		// Dummy transactions for specific dates
 		const dummyTransactions = {
 			'2024-10-15': [
 				{ id: 1, amount: '$50', description: 'Grocery Shopping' },
@@ -58,7 +57,8 @@ function CalendarModal() {
 
 	// Add event function
 	const addEvent = eventDetails => {
-		const dateKey = selectedDate.toLocaleDateString('en-CA') // Use local date key in 'YYYY-MM-DD' format
+		// Ensure dateKey is in YYYY-MM-DD format (ISO format)
+		const dateKey = selectedDate.toISOString().split('T')[0]
 		const newEvent = { id: Date.now(), ...eventDetails } // Include hour and description
 
 		// Update the events state
@@ -66,16 +66,60 @@ function CalendarModal() {
 			...prevEvents,
 			[dateKey]: [...(prevEvents[dateKey] || []), newEvent],
 		}))
-		// onEventClose()
 	}
 
 	// Delete event function
 	const deleteEvent = eventId => {
-		const dateKey = selectedDate.toLocaleDateString('en-CA') // Use local date key
+		const dateKey = selectedDate.toISOString().split('T')[0] // Ensure dateKey is consistent
 		setEvents(prevEvents => ({
 			...prevEvents,
 			[dateKey]: prevEvents[dateKey].filter(event => event.id !== eventId),
 		}))
+	}
+
+	const getTileContent = ({ date }) => {
+		const dateString = date.toISOString().split('T')[0] // Use UTC ISO string
+		const hasEvents = events[dateString] && events[dateString].length > 0
+		const hasTransactions = transactions[dateString] && transactions[dateString].length > 0
+
+		return (
+			<Box
+				position='relative'
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				justifyContent='flex-start'
+				width='100%'
+				height='100%'
+				p={2}
+				margin='5px'
+				borderRadius='8px'>
+				{hasTransactions && (
+					<WarningIcon
+						position='absolute'
+						bg='red.500'
+						borderRadius='full'
+						width='16px'
+						height='16px'
+						top='70%'
+						left='50%'
+						transform='translate(-50%, -50%)'
+					/>
+				)}
+				{hasEvents && (
+					<CalendarIcon
+						position='absolute'
+						bg='yellow.500'
+						borderRadius='15%'
+						width='16px'
+						height='16px'
+						top='70%'
+						left='50%'
+						transform='translate(-50%, -50%)'
+					/>
+				)}
+			</Box>
+		)
 	}
 
 	return (
@@ -98,6 +142,7 @@ function CalendarModal() {
 								value={date}
 								onClickDay={handleDateClick}
 								className='react-calendar' // Your custom styles
+								tileContent={getTileContent}
 								style={{ width: '100%', height: '100%' }} // Ensure calendar takes full size of the Box
 							/>
 						</Box>
@@ -131,7 +176,7 @@ function CalendarModal() {
 									<TabPanel>
 										<Event
 											selectedDate={selectedDate}
-											events={events[selectedDate.toLocaleDateString('en-CA')] || []}
+											events={events[selectedDate.toISOString().split('T')[0]] || []}
 											addEvent={addEvent}
 											deleteEvent={deleteEvent}
 										/>
@@ -141,7 +186,7 @@ function CalendarModal() {
 									<TabPanel>
 										<TransactionList
 											selectedDate={selectedDate}
-											transactions={transactions[selectedDate.toLocaleDateString('en-CA')] || []}
+											transactions={transactions[selectedDate.toISOString().split('T')[0]] || []}
 										/>
 									</TabPanel>
 								</TabPanels>
