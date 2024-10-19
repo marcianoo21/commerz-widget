@@ -14,6 +14,7 @@
 /* Styling the individual days */
 .react-calendar__tile {
 	height: 80px; /* Specify height for tiles */
+
 	background-color: #fff; /* Default tile background color */
 	border: 1px solid #ccc; /* Add a light gray border around each tile */
 	border-radius: 8px; /* Optional: rounded corners */
@@ -25,6 +26,12 @@
 	margin: 5px; /* Add margin for space between tiles */
 }
 
+/* Hover effect for tiles */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+	background-color: #ffd700; /* Gold background on hover */
+	color: #000; /* Text color on hover */
+}
 /* Hover effect for tiles */
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
@@ -67,6 +74,43 @@
 }
 
 /* Change button color on hover */
-.react-calendar__navigation button:hover {
+.react-calendar .react-calendar__navigation button:hover {
 	color: #ffd700; /* White text on hover */
+	background-color: #0a3046;
+}
+
+/* Styles for the smaller calendar */
+.react-calendar-small {
+	width: 400px; /* Ensure it takes full width of the container */
+	height: auto; /* Height will adjust based on content */
+	font-size: 1.2rem;
+	padding: 10px;
+	background-color: #073b4c; /* Main background color for the calendar */
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.react-calendar-small .react-calendar__tile {
+	height: 18px; /* Specify height for tiles */
+	background-color: #fff; /* Default tile background color */
+	border: 1px solid #ccc; /* Add a light gray border around each tile */
+	border-radius: 8px; /* Optional: rounded corners */
+	transition: background-color 0.2s, color 0.2s; /* Add transition for color change */
+	display: flex; /* Use flexbox for centering text */
+	justify-content: center; /* Center text horizontally */
+	align-items: center; /* Center text vertically */
+	color: #073b4c; /* Default text color */
+	margin: 5px; /* Add margin for space between tiles */
+}
+
+.react-calendar-small .react-calendar__tile--now {
+	background-color: #0a3046 !important; /* Dark blue for current date */
+	color: #ffd700; /* Gold text for current date */
+}
+
+/* Change button color on hover */
+.react-calendar-small .react-calendar__navigation button:hover {
+	color: #ffd700; /* White text on hover */
+	background-color: #073b4c;
 }
